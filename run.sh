@@ -3,18 +3,16 @@ set -e
 
 echo "INFO: Starting prepare Wercker environment"
 
-# check if needed variables are set
-if [ "$WERCKER_PREPARE_BOX_PRIVATE_KEY" ]; then
-    # make sure $HOME/.ssh exists
-    if [ ! -d "$HOME/.ssh" ]; then
-      debug "$HOME/.ssh does not exists, creating it"
-      mkdir -p "$HOME/.ssh"
-    fi
-
-    echo -e "$WERCKER_PREPARE_BOX_PRIVATE_KEY" > "$HOME/.ssh/id_rsa"
-    chmod 0600 "$HOME/.ssh/id_rsa"
-    info "written ssh-key to $HOME/.ssh/id_rsa"
+# make sure $HOME/.ssh exists
+if [ ! -d "$HOME/.ssh" ]; then
+  debug "$HOME/.ssh does not exists, creating it"
+  mkdir -p "$HOME/.ssh"
 fi
+
+echo -e "$WERCKER_PREPARE_BOX_PRIVATE_KEY" > "$HOME/.ssh/id_rsa"
+chmod 0600 "$HOME/.ssh/id_rsa"
+info "written ssh-key to $HOME/.ssh/id_rsa"
+
 # shellcheck disable=SC2129
 ssh-keyscan -H github.com >> /etc/ssh/ssh_known_hosts
 # shellcheck disable=SC2129
