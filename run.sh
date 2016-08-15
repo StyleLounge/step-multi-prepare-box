@@ -4,7 +4,7 @@ set -e
 echo "INFO: Starting prepare Wercker environment"
 
 # check if needed variables are set
-if [ $WERCKER_PREPARE_BOX_PRIVATE_KEY" ]; then
+if [ "$WERCKER_PREPARE_BOX_PRIVATE_KEY" ]; then
     # make sure $HOME/.ssh exists
     if [ ! -d "$HOME/.ssh" ]; then
       debug "$HOME/.ssh does not exists, creating it"
@@ -15,13 +15,16 @@ if [ $WERCKER_PREPARE_BOX_PRIVATE_KEY" ]; then
     chmod 0600 "$HOME/.ssh/id_rsa"
     info "written sl-bot ssh-key to $HOME/.ssh/id_rsa"
 fi
-
+# shellcheck disable=SC2129
 ssh-keyscan -H github.com >> /etc/ssh/ssh_known_hosts
+# shellcheck disable=SC2129
 ssh-keyscan -H bitbucket.com >> /etc/ssh/ssh_known_hosts
+# shellcheck disable=SC2129
 ssh-keyscan -H registry.npmjs.org >> /etc/ssh/ssh_known_hosts
 info "added github.com, registry.npm.org and bitbucket.org to knownß hosts"
 
 if [ "$WERCKER_PREPARE_BOX_NPM_REGISTRY_TOKEN" ]; then
+    # shellcheck disable=SC2129
     echo "//registry.npmjs.org/:_authToken=$WERCKER_PREPARE_BOX_NPM_REGISTRY_TOKEN" >> .npmrc
     info "written npm token"
 fi
