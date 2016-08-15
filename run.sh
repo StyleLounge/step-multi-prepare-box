@@ -11,7 +11,7 @@ if [ "$WERCKER_PREPARE_BOX_PRIVATE_KEY" ]; then
       mkdir -p "$HOME/.ssh"
     fi
 
-    echo -e "$GITHUB_SL_BOT_KEY" > "$HOME/.ssh/id_rsa"
+    echo -e "$WERCKER_PREPARE_BOX_PRIVATE_KEY" > "$HOME/.ssh/id_rsa"
     chmod 0600 "$HOME/.ssh/id_rsa"
     info "written sl-bot ssh-key to $HOME/.ssh/id_rsa"
 fi
