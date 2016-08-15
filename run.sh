@@ -13,7 +13,7 @@ if [ "$WERCKER_PREPARE_BOX_PRIVATE_KEY" ]; then
 
     echo -e "$WERCKER_PREPARE_BOX_PRIVATE_KEY" > "$HOME/.ssh/id_rsa"
     chmod 0600 "$HOME/.ssh/id_rsa"
-    info "written sl-bot ssh-key to $HOME/.ssh/id_rsa"
+    info "written ssh-key to $HOME/.ssh/id_rsa"
 fi
 # shellcheck disable=SC2129
 ssh-keyscan -H github.com >> /etc/ssh/ssh_known_hosts
