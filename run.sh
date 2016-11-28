@@ -23,6 +23,6 @@ info "added github.com, registry.npm.org and bitbucket.org to knownß hosts"
 
 if [ "$WERCKER_PREPARE_BOX_NPM_REGISTRY_TOKEN" ]; then
     # shellcheck disable=SC2129
-    echo "//registry.npmjs.org/:_authToken=$WERCKER_PREPARE_BOX_NPM_REGISTRY_TOKEN" >> .npmrc
+    echo "//registry.npmjs.org/:_authToken=$WERCKER_PREPARE_BOX_NPM_REGISTRY_TOKEN" >> "$HOME/.npmrc"
     info "written npm token"
 fi
